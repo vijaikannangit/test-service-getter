@@ -14,13 +14,23 @@ node {
                     python service-getter.py -u $confUrl -a "$appName"
                     
                 """
-                // Capture the output of the Python script
-                def scriptOutput = bat(script: serviceInfoCommand, returnStatus: true).trim()
-                // Print the output
-                echo "Vijai Python Script Output: ${scriptOutput}"
-                def slurper = new JsonSlurper()
-                def serviceMap = slurper.parseText(scriptOutput)
-                echo "ServiceMap: ${serviceMap}"
+                // Capture the output of the Python script and status code
+                // def scriptOutput = bat(script: serviceInfoCommand, returnStatus: true).trim()
+                // Capture the output of the Python script and status code
+                def scriptOutput = bat(script: serviceInfoCommand, returnStatus: true)
+                
+                // Check the status code
+                if (scriptOutput != 0) {
+                    error "Error running Python script. Exit code: ${scriptOutput}"
+                } else {
+                    // Capture the output of the Python script
+                    def scriptOutputText = bat(script: serviceInfoCommand, returnStatus: true).trim()
+                    // Print the output
+                    echo "Vijai Python Script Output: ${scriptOutputText}"
+                    
+                    def slurper = new JsonSlurper()
+                    def serviceMap = slurper.parseText(scriptOutputText)
+                    echo "ServiceMap: ${serviceMap}"
 
                 // println(serviceMap)
                 // println "Appliction : ${serviceMap.RMI Platform}"
