@@ -16,7 +16,7 @@ node {
                 """
                 // Capture the output of the Python script and status code
                 // def scriptOutput = bat(script: serviceInfoCommand, returnStatus: true).trim()
-                def scriptOutput = bat(script: serviceInfoCommand, returnStatus: true).trim()
+                def scriptOutput = bat(script: serviceInfoCommand, returnStdout: true).trim()
                 // Print the output
                 // echo "Python Script Output: ${scriptOutput}"
                 print("Python Script Output: ${scriptOutput}")
