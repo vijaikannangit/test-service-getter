@@ -18,8 +18,10 @@ node {
                 def scriptOutput = bat(script: serviceInfoCommand, returnStatus: true).trim()
                 // Print the output
                 echo "Vijai Python Script Output: ${scriptOutput}"
-                // def slurper = new JsonSlurper()
-                // def serviceMap = slurper.parseText(scriptOutput)
+                def slurper = new JsonSlurper()
+                def serviceMap = slurper.parseText(scriptOutput)
+                echo "ServiceMap: ${serviceMap}"
+
                 // println(serviceMap)
                 // println "Appliction : ${serviceMap.RMI Platform}"
                 // println "Age: ${serviceMap.RMI Core API}"
