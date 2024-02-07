@@ -20,6 +20,7 @@ node {
                 echo "Vijai Python Script Output: ${scriptOutput}"
                 def slurper = new JsonSlurper()
                 def serviceMap = slurper.parseText(scriptOutput)
+                println(serviceMap)
                 // println "Appliction : ${serviceMap.RMI Platform}"
                 // println "Age: ${serviceMap.RMI Core API}"
                 // println "City: ${serviceMap.RMI Core UI}"
