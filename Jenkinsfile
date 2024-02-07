@@ -18,8 +18,10 @@ node {
                 // def scriptOutput = bat(script: serviceInfoCommand, returnStatus: true).trim()
                 def scriptOutput = bat(script: serviceInfoCommand, returnStdout: true).trim()
                 // Print the output
-                // echo "Python Script Output: ${scriptOutput}"
+                echo "Python Script Output: ${scriptOutput}"
                 print("Python Script Output: ${scriptOutput}")
+                println"Python Script Output: ${scriptOutput}
+                
                 // def slurper = new JsonSlurper()
                 // def serviceMap = slurper.parseText(scriptOutput)
                 // echo "ServiceMap: ${serviceMap}"
