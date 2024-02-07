@@ -31,7 +31,7 @@ node {
                     def slurper = new JsonSlurper()
                     def serviceMap = slurper.parseText(scriptOutputText)
                     echo "ServiceMap: ${serviceMap}"
-
+                }
                 // println(serviceMap)
                 // println "Appliction : ${serviceMap.RMI Platform}"
                 // println "Age: ${serviceMap.RMI Core API}"
