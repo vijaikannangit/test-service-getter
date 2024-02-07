@@ -20,13 +20,13 @@ node {
                 echo "Vijai Python Script Output: ${scriptOutput}"
                 def slurper = new JsonSlurper()
                 def serviceMap = slurper.parseText(scriptOutput)
-                println "Name: ${serviceMap.RMI Platform}"
-                println "Age: ${serviceMap.RMI Core API}"
-                println "City: ${serviceMap.RMI Core UI}"
-                println "City: ${serviceMap.RMI Workflow UI}"
-                println "City: ${serviceMap.RMI Workflow API}"
-                println "City: ${serviceMap.RMI Core API-LN}"
-                println "City: ${serviceMap.RMI Core UI-LN}"
+                println "Appliction : ${serviceMap.RMI Platform}"
+                // println "Age: ${serviceMap.RMI Core API}"
+                // println "City: ${serviceMap.RMI Core UI}"
+                // println "City: ${serviceMap.RMI Workflow UI}"
+                // println "City: ${serviceMap.RMI Workflow API}"
+                // println "City: ${serviceMap.RMI Core API-LN}"
+                // println "City: ${serviceMap.RMI Core UI-LN}"
                 def confDataString = readFile 'service-job-mapping.json'
                 def serviceConfig = slurper.parseText(confDataString)
                 def seviceNamesToExecute = serviceMap['RMI Platform']
