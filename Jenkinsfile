@@ -20,9 +20,9 @@ node {
                 // Print the output
                 // echo "Python Script Output: ${scriptOutput}"
                 print("Python Script Output: ${scriptOutput}")
-                def slurper = new JsonSlurper()
-                def serviceMap = slurper.parseText(scriptOutput)
-                echo "ServiceMap: ${serviceMap}"
+                // def slurper = new JsonSlurper()
+                // def serviceMap = slurper.parseText(scriptOutput)
+                // echo "ServiceMap: ${serviceMap}"
 
                 // println(serviceMap)
                 // println "Appliction : ${serviceMap.RMI Platform}"
