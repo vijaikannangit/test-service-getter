@@ -15,7 +15,7 @@ node {
                     
                 """
                 // Capture the output of the Python script
-                // def scriptOutput = bat(script: serviceInfoCommand, returnStatus: true).trim()
+                def scriptOutput = bat(script: serviceInfoCommand, returnStatus: true).trim()
                 // Print the output
                 echo "Vijai Python Script Output: ${scriptOutput}"
                 // def slurper = new JsonSlurper()
