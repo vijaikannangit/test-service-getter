@@ -1,14 +1,14 @@
 import groovy.json.JsonSlurper
 
-node {
+node {}{
     def confUrl = 'https://vijaik.atlassian.net/wiki/rest/api/content/33141?expand=body.storage'
     def appName = 'RMI Sample'
-
+    
     stage('Get Services Info') {
         checkout scm
 
         withCredentials([usernamePassword(credentialsId: 'CONFLUENCE', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
-            script {
+            // script {
                 def serviceInfoCommand = """
                     python -m pip install -r requirements.txt --user
                     python service-getter.py -u $confUrl -a "$appName"
@@ -21,7 +21,13 @@ node {
                 echo "Python Script Output: ${scriptOutput}"
                 print("Python Script Output: ${scriptOutput}")
                 println"Python Script Output: ${scriptOutput}
-                
+            // }
+        }
+    }
+}
+
+
+
                 // def slurper = new JsonSlurper()
                 // def serviceMap = slurper.parseText(scriptOutput)
                 // echo "ServiceMap: ${serviceMap}"
@@ -51,10 +57,7 @@ node {
                 // //     // })
                 // // }
                 // parallel(jobs)
-            }
-        }
-    }
-}
+
 
 // def getJobParamters(serviceConf, version) {
 //     def jobParameters = []
