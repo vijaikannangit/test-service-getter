@@ -7,9 +7,9 @@ node () {
     stage('Deploy Services') {
         checkout scm
         withCredentials([usernamePassword(credentialsId: 'CONFLUENCE', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
-            sh "python -m pip install -r requirements.txt --user"
+            bat "python -m pip install -r requirements.txt --user"
             def serviceGetterCmd = "python service-getter.py --url '$confluenceApiUrl' --appname '$appName'"
-            def status = sh(script: serviceGetterCmd, returnStatus: true)
+            def status = bat(script: serviceGetterCmd, returnStatus: true)
             if (status == 0) {
                 def servicesInfo = readJSON file: "output.json"
                 echo "Service getter output (Map): ${servicesInfo}"
