@@ -8,7 +8,7 @@ node () {
         checkout scm
         withCredentials([usernamePassword(credentialsId: 'CONFLUENCE', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
             bat "python -m pip install -r requirements.txt --user"
-            def serviceGetterCmd = "python service-getter.py --url '$confluenceApiUrl' --appname '$appName'"
+            def serviceGetterCmd = "python service-getter.py -u '$confluenceApiUrl' -a '$appName'"
             def status = bat(script: serviceGetterCmd, returnStatus: true)
             if (status == 0) {
                 def servicesInfo = readJSON file: "output.json"
