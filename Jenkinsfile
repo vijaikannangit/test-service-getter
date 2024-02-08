@@ -1,31 +1,24 @@
-import groovy.json.JsonSlurper
+def confluenceBaseUrl = 'https://vijaik.atlassian.net/wiki'
+def confluencePageId = '33141'
+def appName = 'RMI Platform'
+def confluenceApiUrl = "${confluenceBaseUrl}/rest/api/content/${confluencePageId}?expand=body.storage"
 
-node {}{
-    def confUrl = 'https://vijaik.atlassian.net/wiki/rest/api/content/33141?expand=body.storage'
-    def appName = 'RMI Sample'
-    
-    stage('Get Services Info') {
+node () {
+    stage('Deploy Services') {
         checkout scm
-
-        withCredentials([usernamePassword(credentialsId: 'CONFLUENCE', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
-            // script {
-                def serviceInfoCommand = """
-                    python -m pip install -r requirements.txt --user
-                    python service-getter.py -u $confUrl -a "$appName"
-                    
-                """
-                // Capture the output of the Python script and status code
-                // def scriptOutput = bat(script: serviceInfoCommand, returnStatus: true).trim()
-                def scriptOutput = bat(script: serviceInfoCommand, returnStdout: true).trim()
-                // Print the output
-                echo "Python Script Output: ${scriptOutput}"
-                print("Python Script Output: ${scriptOutput}")
-                println"Python Script Output: ${scriptOutput}
-            // }
+        withCredentials([usernamePassword(credentialsId: 'CONFLUENCE_CRED', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
+            sh "python -m pip install -r requirements.txt --user"
+            def serviceGetterCmd = "python service-getter.py --url '$confluenceApiUrl' --appname '$appName'"
+            def status = sh(script: serviceGetterCmd, returnStatus: true)
+            if (status == 0) {
+                def servicesInfo = readJSON file: "output.json"
+                echo "Service getter output (Map): ${servicesInfo}"
+            }else {
+                error "Failed to get services list from confluece page"
+            }
         }
     }
 }
-
 
 
                 // def slurper = new JsonSlurper()
