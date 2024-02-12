@@ -115,23 +115,28 @@ def find_service_name(table_data, target_application_name):
     """
     app_source = {}
     for row in table_data:
-        application_name = row['Applications']
-        if target_application_name.lower() in application_name.lower():
-            # Clean application name
-            application_name = clean_text(application_name)
+        # Check if 'Applications' key is present in the row
+        if 'Applications' in row:
+            application_name = row['Applications']
+            if target_application_name.lower() in application_name.lower():
+                # Clean application name
+                application_name = clean_text(application_name)
 
-            service_name_data = row['ServiceName']
-            # Extract service names and corresponding values
-            service_names = [item.split(':') for item in service_name_data.split('<p>') if ':' in item]
-            service_data = {name.strip(): clean_text(value) for name, value in service_names if len(name) > 0 and len(value) > 0}
-            
-            app_source[application_name] = service_data
+                # Check if 'ServiceName' key is present in the row
+                if 'ServiceName' in row:
+                    service_name_data = row['ServiceName']
+                    # Extract service names and corresponding values
+                    service_names = [item.split(':') for item in service_name_data.split('<p>') if ':' in item]
+                    service_data = {name.strip(): clean_text(value) for name, value in service_names if len(name) > 0 and len(value) > 0}
+                    
+                    app_source[application_name] = service_data
     return app_source
 
 #  To get confluence page data
 html_content = get_confluence_page_html(username, confluence_apitoken)
 if html_content:
     table_data = extract_table_data(html_content)
+    # print (f"table_data : {table_data}")
     if table_data:
         service_names = find_service_name(table_data, application_name) 
         if service_names:
@@ -139,4 +144,4 @@ if html_content:
                 json.dump(service_names, f)
             print(json.dumps(service_names, indent=2))
         else:
-            print(f"service names not found ")
+            print(f"Applications / Service names not found ")
