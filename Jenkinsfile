@@ -11,7 +11,7 @@ def confluenceApiUrl = "${confluenceBaseUrl}/rest/api/content/${confluencePageId
 //         checkout scm
 //         withCredentials([usernamePassword(credentialsId: 'CONFLUENCE', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
 //             bat "python -m pip install -r requirements.txt --user"
-//             def serviceGetterCmd = "python service-getter.py -u '$confluenceApiUrl' -t '$tableIndex' -p '$Applications' -s '$ServiceName' -a '$appName'"
+//             def serviceGetterCmd = "python service-getter.py -u '$confluenceApiUrl' -t '$tableIndex' -p '$tableServiceName' -s '$tableServiceName' -a '$appName'"
 //             def status = bat(script: serviceGetterCmd, returnStatus: true)
 //             if (status == 0) {
 //                 def servicesInfo = readJSON file: "output.json"
