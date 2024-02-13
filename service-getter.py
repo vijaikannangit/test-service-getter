@@ -11,7 +11,7 @@ argparser = argparse.ArgumentParser(prog='service-getter',
 argparser.add_argument('-u', '--url', type=str, metavar='', required=True, help='url to access confluence page')
 argparser.add_argument('-t', '--table_index', type=str, metavar='', required=True, help='Table index to read from confluence page')
 argparser.add_argument('-p', '--table_app', type=str, metavar='', required=True, help='Table application header name to read from confluence page')
-argparser.add_argument('-s', '--table_servname', type=str, metavar='', required=True, help='Table service name to read from confluence page')
+argparser.add_argument('-s', '--table_servname', type=str, metavar='', required=True, help='Table service name header to read from confluence page')
 argparser.add_argument('-a', '--appname', type=str, metavar='', required=True, help='Application name')
 
 args = argparser.parse_args()
