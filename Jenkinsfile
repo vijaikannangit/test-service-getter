@@ -6,23 +6,49 @@ def tableServiceName = 'ServiceName'
 def appName = 'RMI Platform'
 def confluenceApiUrl = "${confluenceBaseUrl}/rest/api/content/${confluencePageId}?expand=body.storage"
 
-node () {
+// node () {
+//     stage('Deploy Services') {
+//         checkout scm
+//         withCredentials([usernamePassword(credentialsId: 'CONFLUENCE', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
+//             bat "python -m pip install -r requirements.txt --user"
+//             def serviceGetterCmd = "python service-getter.py -u '$confluenceApiUrl' -t '$tableIndex' -p '$Applications' -s '$ServiceName' -a '$appName'"
+//             def status = bat(script: serviceGetterCmd, returnStatus: true)
+//             if (status == 0) {
+//                 def servicesInfo = readJSON file: "output.json"
+//                 echo "Service getter output (Map): ${servicesInfo}"
+//             }else {
+//                 error "Failed to get services list from confluece page"
+//             }
+//         }
+//     }
+// }
+
+node {
     stage('Deploy Services') {
         checkout scm
         withCredentials([usernamePassword(credentialsId: 'CONFLUENCE', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
             bat "python -m pip install -r requirements.txt --user"
+            
+            // Run Python script and capture the output
             def serviceGetterCmd = "python service-getter.py -u '$confluenceApiUrl' -t '$tableIndex' -p '$Applications' -s '$ServiceName' -a '$appName'"
+            def servicesInfo = bat(script: serviceGetterCmd, returnStdout: true).trim()
+
+            // Check the exit status
             def status = bat(script: serviceGetterCmd, returnStatus: true)
+
             if (status == 0) {
-                def servicesInfo = readJSON file: "output.json"
-                echo "Service getter output (Map): ${servicesInfo}"
-            }else {
-                error "Failed to get services list from confluece page"
+                // Print the captured output
+                echo "Service getter output (String): ${servicesInfo}"
+
+                // Optionally, convert the output to JSON
+                def servicesJson = readJSON text: servicesInfo
+                echo "Service getter output (Map): ${servicesJson}"
+            } else {
+                error "Failed to get services list from Confluence page"
             }
         }
     }
 }
-
 
                 // def slurper = new JsonSlurper()
                 // def serviceMap = slurper.parseText(scriptOutput)
