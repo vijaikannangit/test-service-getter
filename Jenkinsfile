@@ -3,7 +3,7 @@ def confluencePageId = '2523141'
 def tableIndex = '16'
 def tableAppl = 'Applications'
 def tableServiceName = 'ServiceName'
-def appName = 'RMI Platform'
+def appName = "'RMI Platform'"
 def confluenceApiUrl = "${confluenceBaseUrl}/rest/api/content/${confluencePageId}?expand=body.storage"
 
 
