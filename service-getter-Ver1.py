@@ -9,16 +9,12 @@ import os
 argparser = argparse.ArgumentParser(prog='service-getter',
                                     description='To read table content from confluence page and providing output to jenkins pipeline')
 argparser.add_argument('-u', '--url', type=str, metavar='', required=True, help='url to access confluence page')
-argparser.add_argument('-t', '--table_index', type=str, metavar='', required=True, help='Table index to read from confluence page')
-argparser.add_argument('-p', '--table_app', type=str, metavar='', required=True, help='Table application header name to read from confluence page')
-argparser.add_argument('-s', '--table_servname', type=str, metavar='', required=True, help='Table service name to read from confluence page')
+argparser.add_argument('-t', '--table_index', type=str, metavar='', required=True, help='Tabel index to read from confluence page')
 argparser.add_argument('-a', '--appname', type=str, metavar='', required=True, help='Application name')
 
 args = argparser.parse_args()
 confluence_rest_api = args.url
 table_index = args.table_index
-table_app = args.table_app
-table_servname = args.table_servname
 application_name = args.appname
 
 # Confluence Username and Apitoken
@@ -107,30 +103,28 @@ def clean_text(text):
     return cleaned_text
 
 
-def find_service_name(table_data, target_application_name, applications_key, service_name_key):
+def find_service_name(table_data, target_application_name):
     """Get the service name from confluence page table
 
     Args:
         table_data (list): List of dictionaries representing the table data from confluence
         target_application_name (str): The name of the application to search for
-        applications_key (str): Key for the 'Applications' column in the table_data
-        service_name_key (str): Key for the 'ServiceName' column in the table_data
 
     Returns:
         dict: A dictionary containing the application name as key and the corresponding service names as value
     """
     app_source = {}
     for row in table_data:
-        # Check if applications_key is present in the row
-        if applications_key  in row:
-            application_name = row[applications_key]
+        # Check if 'Applications' key is present in the row
+        if 'Applications' in row:
+            application_name = row['Applications']
             if target_application_name.lower() in application_name.lower():
                 # Clean application name
                 application_name = clean_text(application_name)
 
-                # Check if service_name_key key is present in the row
-                if service_name_key in row:
-                    service_name_data = row[service_name_key]
+                # Check if 'ServiceName' key is present in the row
+                if 'ServiceName' in row:
+                    service_name_data = row['ServiceName']
                     # Extract service names and corresponding values
                     service_names = [item.split(':') for item in service_name_data.split('<p>') if ':' in item]
                     service_data = {name.strip(): clean_text(value) for name, value in service_names if len(name) > 0 and len(value) > 0}
@@ -144,7 +138,7 @@ if html_content:
     table_data = extract_table_data(html_content)
     # print (f"table_data : {table_data}")
     if table_data:
-        service_names = find_service_name(table_data, application_name, table_app, table_servname) 
+        service_names = find_service_name(table_data, application_name) 
         if service_names:
             with open('output.json', 'w') as f:
                 json.dump(service_names, f)
