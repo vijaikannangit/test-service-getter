@@ -3,7 +3,7 @@ def confluencePageId = '2523141'
 def tableIndex = '16'
 def tableAppl = 'Applications'
 def tableServiceName = 'ServiceName'
-def appName = "'RMI Platform'"
+def appName = 'RMI Platform'
 def confluenceApiUrl = "${confluenceBaseUrl}/rest/api/content/${confluencePageId}?expand=body.storage"
 
 
@@ -14,7 +14,15 @@ node {
             bat "python -m pip install -r requirements.txt --user"
             echo "Vijai"
             // Run Python script and capture the output
-            def serviceGetterCmd = "python service-getter.py -u '$confluenceApiUrl' -t '$tableIndex' -p '$tableAppl' -s '$tableServiceName' -a '$appName'"
+            def serviceGetterCmd = """
+                python service-getter.py
+                -u '$confluenceApiUrl'
+                -t '$tableIndex'
+                -p '$tableAppl'
+                -s '$tableServiceName'
+                -a '${appName.replaceAll("'", "\'")}'  // Escape single quotes
+            """.trim()
+            
             def servicesInfo = bat(script: serviceGetterCmd, returnStdout: true).trim()
 
             // Check the exit status
