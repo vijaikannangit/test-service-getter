@@ -28,7 +28,7 @@ node {
         checkout scm
         withCredentials([usernamePassword(credentialsId: 'CONFLUENCE', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
             bat "python -m pip install -r requirements.txt --user"
-            
+            echo "Vijai"
             // Run Python script and capture the output
             def serviceGetterCmd = "python service-getter.py -u '$confluenceApiUrl' -t '$tableIndex' -p '$Applications' -s '$ServiceName' -a '$appName'"
             def servicesInfo = bat(script: serviceGetterCmd, returnStdout: true).trim()
