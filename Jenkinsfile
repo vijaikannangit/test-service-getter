@@ -1,6 +1,8 @@
 def confluenceBaseUrl = 'https://vijaik.atlassian.net/wiki'
 def confluencePageId = '2523141'
 def tableIndex = '16'
+def tableAppl = 'Applications'
+def tableServiceName = 'ServiceName'
 def appName = 'RMI Platform'
 def confluenceApiUrl = "${confluenceBaseUrl}/rest/api/content/${confluencePageId}?expand=body.storage"
 
@@ -9,7 +11,7 @@ node () {
         checkout scm
         withCredentials([usernamePassword(credentialsId: 'CONFLUENCE', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
             bat "python -m pip install -r requirements.txt --user"
-            def serviceGetterCmd = "python service-getter.py -u '$confluenceApiUrl' -t '$tableIndex' -a '$appName'"
+            def serviceGetterCmd = "python service-getter.py -u '$confluenceApiUrl' -t '$tableIndex' -p '$Applications' -s '$ServiceName' -a '$appName'"
             def status = bat(script: serviceGetterCmd, returnStatus: true)
             if (status == 0) {
                 def servicesInfo = readJSON file: "output.json"
