@@ -6,22 +6,6 @@ def tableServiceName = 'ServiceName'
 def appName = 'RMI Platform'
 def confluenceApiUrl = "${confluenceBaseUrl}/rest/api/content/${confluencePageId}?expand=body.storage"
 
-// node () {
-//     stage('Deploy Services') {
-//         checkout scm
-//         withCredentials([usernamePassword(credentialsId: 'CONFLUENCE', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
-//             bat "python -m pip install -r requirements.txt --user"
-//             def serviceGetterCmd = "python service-getter.py -u '$confluenceApiUrl' -t '$tableIndex' -p '$tableAppl' -s '$tableServiceName' -a '$appName'"
-//             def status = bat(script: serviceGetterCmd, returnStatus: true)
-//             if (status == 0) {
-//                 def servicesInfo = readJSON file: "output.json"
-//                 echo "Service getter output (Map): ${servicesInfo}"
-//             }else {
-//                 error "Failed to get services list from confluece page"
-//             }
-//         }
-//     }
-// }
 
 node {
     stage('Deploy Services') {
@@ -30,7 +14,7 @@ node {
             bat "python -m pip install -r requirements.txt --user"
             echo "Vijai"
             // Run Python script and capture the output
-            def serviceGetterCmd = "python service-getter.py -u '$confluenceApiUrl' -t '$tableIndex' -p '$Applications' -s '$ServiceName' -a '$appName'"
+            def serviceGetterCmd = "python service-getter.py -u '$confluenceApiUrl' -t '$tableIndex' -p '$tableAppl' -s '$tableServiceName' -a '$appName'"
             def servicesInfo = bat(script: serviceGetterCmd, returnStdout: true).trim()
 
             // Check the exit status
@@ -49,6 +33,23 @@ node {
         }
     }
 }
+
+// node () {
+//     stage('Deploy Services') {
+//         checkout scm
+//         withCredentials([usernamePassword(credentialsId: 'CONFLUENCE', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
+//             bat "python -m pip install -r requirements.txt --user"
+//             def serviceGetterCmd = "python service-getter.py -u '$confluenceApiUrl' -t '$tableIndex' -p '$tableAppl' -s '$tableServiceName' -a '$appName'"
+//             def status = bat(script: serviceGetterCmd, returnStatus: true)
+//             if (status == 0) {
+//                 def servicesInfo = readJSON file: "output.json"
+//                 echo "Service getter output (Map): ${servicesInfo}"
+//             }else {
+//                 error "Failed to get services list from confluece page"
+//             }
+//         }
+//     }
+// }
 
                 // def slurper = new JsonSlurper()
                 // def serviceMap = slurper.parseText(scriptOutput)
