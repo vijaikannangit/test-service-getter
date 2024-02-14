@@ -20,9 +20,9 @@ node {
                 -t '$tableIndex'
                 -p '$tableAppl'
                 -s '$tableServiceName'
-                -a '${appName.replaceAll("'", "\'")}'  // Escape single quotes
+                -a "${appName}"
             """.trim()
-            
+
             def servicesInfo = bat(script: serviceGetterCmd, returnStdout: true).trim()
 
             // Check the exit status
