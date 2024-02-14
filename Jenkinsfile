@@ -5,7 +5,7 @@ def tableAppl = 'Applications'
 def tableServiceName = 'ServiceName'
 def appName = 'RMI Platform'
 // def confluenceApiUrl = "${confluenceBaseUrl}/rest/api/content/${confluencePageId}?expand=body.storage"
-def confluence_rest_api = "https://vijaik.atlassian.net/wiki/rest/api/content/2523141?expand=body.storage"
+def confluenceApiUrl = "https://vijaik.atlassian.net/wiki/rest/api/content/2523141?expand=body.storage"
 
 
 node {
