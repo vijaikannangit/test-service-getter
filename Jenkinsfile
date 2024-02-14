@@ -1,4 +1,4 @@
-def jsonData = '''
+def scriptOutput = '''
 {
   "RMI Platform": {
     "RMI Core API": "279",
@@ -11,9 +11,12 @@ def jsonData = '''
 }
 '''
 
-def jsonVariable = new groovy.json.JsonSlurper().parseText(jsonData)
+def slurper = new JsonSlurper()
+def serviceMap = slurper.parseText(scriptOutput)
+echo "ServiceMap: ${serviceMap}"
 
-println(jsonVariable)
+// def jsonVariable = new groovy.json.JsonSlurper().parseText(jsonData)
+// println(jsonVariable)
 
 
 // def confluenceBaseUrl = 'https://vijaik.atlassian.net/wiki'
