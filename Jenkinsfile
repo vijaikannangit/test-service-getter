@@ -6,22 +6,20 @@ def tableServiceName = 'ServiceName'
 def appName = 'RMI Platform'
 def confluenceApiUrl = "${confluenceBaseUrl}/rest/api/content/${confluencePageId}?expand=body.storage"
 
-
 node {
     stage('Deploy Services') {
         checkout scm
         withCredentials([usernamePassword(credentialsId: 'CONFLUENCE', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
             bat "python -m pip install -r requirements.txt --user"
             echo "Vijai before def "
+            
             // Run Python script and capture the output
-            def serviceGetterCmd = """
-                python service-getter.py
-                -u '$confluenceApiUrl'
-                -t '$tableIndex'
-                -p '$tableAppl'
-                -s '$tableServiceName'
-                -a "${appName}"
-            """
+            def serviceGetterCmd = "python service-getter.py " +
+                                  "-u '$confluenceApiUrl' " +
+                                  "-t '$tableIndex' " +
+                                  "-p '$tableAppl' " +
+                                  "-s '$tableServiceName' " +
+                                  "-a \"$appName\""
 
             def servicesInfo = bat(script: serviceGetterCmd, returnStdout: true).trim()
 
