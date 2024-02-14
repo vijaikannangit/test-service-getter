@@ -1,51 +1,68 @@
-def confluenceBaseUrl = 'https://vijaik.atlassian.net/wiki'
-def confluencePageId = '2523141'
-def tableIndex = '16'
-def tableAppl = 'Applications'
-def tableServiceName = 'ServiceName'
-def appName = 'RMI Platform'
-// def confluenceApiUrl = "${confluenceBaseUrl}/rest/api/content/${confluencePageId}?expand=body.storage"
-def confluenceApiUrl = "https://vijaik.atlassian.net/wiki/rest/api/content/2523141?expand=body.storage"
-
-
-node {
-    stage('Deploy Services') {
-        checkout scm
-        withCredentials([usernamePassword(credentialsId: 'CONFLUENCE', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
-            bat "python -m pip install -r requirements.txt --user"
-            echo "Vijai before def "
-            
-            // Run Python script and capture the output
-            // def serviceGetterCmd = "python service-getter.py " +
-                                  "-u '$confluenceApiUrl' " +
-                                  "-t '$tableIndex' " +
-                                  "-p '$tableAppl' " +
-                                  "-s '$tableServiceName' " +
-                                  "-a \"$appName\""
-
-            def serviceGetterCmd = "python service-getter.py -u https://vijaik.atlassian.net/wiki/rest/api/content/2523141?expand=body.storage  -t 16 -p "Applications" -s "ServiceName" -a "RMI Platform""
-            echo "After service getter"
-
-            def servicesInfo = bat(script: serviceGetterCmd, returnStdout: true).trim()
-            echo "Python script output: ${servicesInfo}"
-
-            // Check the exit status
-            def status = bat(script: serviceGetterCmd, returnStatus: true)
-            echo "Python script output: ${status}"
-
-            if (status == 0) {
-                // Print the captured output
-                echo "Service getter output (String): ${servicesInfo}"
-
-                // Optionally, convert the output to JSON
-                def servicesJson = readJSON text: servicesInfo
-                echo "Service getter output (Map): ${servicesJson}"
-            } else {
-                error "Failed to get services list from Confluence page"
-            }
-        }
-    }
+def jsonData = '''
+{
+  "RMI Platform": {
+    "RMI Core API": "279",
+    "RMI Core UI": "1986",
+    "RMI Workflow UI": "1011",
+    "RMI Workflow API": "837",
+    "RMI Core API-LN": "279",
+    "RMI Core UI-LN": "1986"
+  }
 }
+'''
+
+def jsonVariable = new groovy.json.JsonSlurper().parseText(jsonData)
+
+println(jsonVariable)
+
+
+// def confluenceBaseUrl = 'https://vijaik.atlassian.net/wiki'
+// def confluencePageId = '2523141'
+// def tableIndex = '16'
+// def tableAppl = 'Applications'
+// def tableServiceName = 'ServiceName'
+// def appName = 'RMI Platform'
+// // def confluenceApiUrl = "${confluenceBaseUrl}/rest/api/content/${confluencePageId}?expand=body.storage"
+// def confluenceApiUrl = "https://vijaik.atlassian.net/wiki/rest/api/content/2523141?expand=body.storage"
+
+
+// node {
+//     stage('Deploy Services') {
+//         checkout scm
+//         withCredentials([usernamePassword(credentialsId: 'CONFLUENCE', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
+//             bat "python -m pip install -r requirements.txt --user"
+//             echo "Vijai before def "
+            
+//             // Run Python script and capture the output
+//             def serviceGetterCmd = "python service-getter.py " +
+//                                   "-u '$confluenceApiUrl' " +
+//                                   "-t '$tableIndex' " +
+//                                   "-p '$tableAppl' " +
+//                                   "-s '$tableServiceName' " +
+//                                   "-a \"$appName\""
+
+//             echo "After service getter"
+
+//             def servicesInfo = bat(script: serviceGetterCmd, returnStdout: true).trim()
+//             echo "Python script output: ${servicesInfo}"
+
+//             // Check the exit status
+//             def status = bat(script: serviceGetterCmd, returnStatus: true)
+//             echo "Python script output: ${status}"
+
+//             if (status == 0) {
+//                 // Print the captured output
+//                 echo "Service getter output (String): ${servicesInfo}"
+
+//                 // Optionally, convert the output to JSON
+//                 def servicesJson = readJSON text: servicesInfo
+//                 echo "Service getter output (Map): ${servicesJson}"
+//             } else {
+//                 error "Failed to get services list from Confluence page"
+//             }
+//         }
+//     }
+// }
 
 // node () {
 //     stage('Deploy Services') {
