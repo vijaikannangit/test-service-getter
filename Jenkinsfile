@@ -22,9 +22,11 @@ node {
                                   "-a \"$appName\""
 
             def servicesInfo = bat(script: serviceGetterCmd, returnStdout: true).trim()
+            echo "Python script output: ${servicesInfo}"
 
             // Check the exit status
             def status = bat(script: serviceGetterCmd, returnStatus: true)
+            echo "Python script output: ${status}"
 
             if (status == 0) {
                 // Print the captured output
