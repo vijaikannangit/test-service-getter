@@ -16,13 +16,14 @@ node {
             echo "Vijai before def "
             
             // Run Python script and capture the output
-            def serviceGetterCmd = "python service-getter.py " +
+            // def serviceGetterCmd = "python service-getter.py " +
                                   "-u '$confluenceApiUrl' " +
                                   "-t '$tableIndex' " +
                                   "-p '$tableAppl' " +
                                   "-s '$tableServiceName' " +
                                   "-a \"$appName\""
 
+            def serviceGetterCmd = "python service-getter.py -u https://vijaik.atlassian.net/wiki/rest/api/content/2523141?expand=body.storage  -t 16 -p "Applications" -s "ServiceName" -a "RMI Platform""
             echo "After service getter"
 
             def servicesInfo = bat(script: serviceGetterCmd, returnStdout: true).trim()
