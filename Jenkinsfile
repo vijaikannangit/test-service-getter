@@ -16,6 +16,11 @@ def scriptOutput = '''
 def slurper = new JsonSlurper()
 def serviceMap = slurper.parseText(scriptOutput)
 echo "ServiceMap: ${serviceMap}"
+def confDataString = readFile 'service-job-mapping.json'
+echo "ServiceMap: ${confDataString}"
+
+
+
 
 // def jsonVariable = new groovy.json.JsonSlurper().parseText(jsonData)
 // println(jsonVariable)
