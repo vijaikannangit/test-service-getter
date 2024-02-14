@@ -12,7 +12,7 @@ node {
         checkout scm
         withCredentials([usernamePassword(credentialsId: 'CONFLUENCE', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
             bat "python -m pip install -r requirements.txt --user"
-            echo "Vijai"
+            echo "Vijai before def "
             // Run Python script and capture the output
             def serviceGetterCmd = """
                 python service-getter.py
@@ -21,7 +21,7 @@ node {
                 -p '$tableAppl'
                 -s '$tableServiceName'
                 -a "${appName}"
-            """.trim()
+            """
 
             def servicesInfo = bat(script: serviceGetterCmd, returnStdout: true).trim()
 
