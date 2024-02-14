@@ -21,6 +21,8 @@ node {
                                   "-s '$tableServiceName' " +
                                   "-a \"$appName\""
 
+            echo "After service getter"
+
             def servicesInfo = bat(script: serviceGetterCmd, returnStdout: true).trim()
             echo "Python script output: ${servicesInfo}"
 
