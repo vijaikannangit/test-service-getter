@@ -1,11 +1,5 @@
 import groovy.json.JsonSlurper
 
-
-node {
-}
-
-
-
 // def jsonVariable = new groovy.json.JsonSlurper().parseText(jsonData)
 // println(jsonVariable)
 
@@ -39,14 +33,6 @@ node {
             bat "python -m pip install -r requirements.txt --user"
             echo "Vijai before def "
             
-            def slurper = new JsonSlurper()
-            def serviceMap = slurper.parseText(scriptOutput)
-            echo "ServiceMap: ${serviceMap}"
-            def confDataString = readJSON file: 'C:\\Vijaik\\Freelancing\\test_service_getter\\service-job-mapping.json'
-            // def props = readJSON file: 'dir/input.json'
-            echo "confDataString: ${confDataString}"
-
-
             // Run Python script and capture the output
             // def serviceGetterCmd = "python service-getter.py " +
             //                       "-u '$confluenceApiUrl' " +
@@ -74,6 +60,12 @@ node {
             // } else {
             //     error "Failed to get services list from Confluence page"
             // }
+            def slurper = new JsonSlurper()
+            def serviceMap = slurper.parseText(scriptOutput)
+            echo "ServiceMap: ${serviceMap}"
+            def confDataString = readJSON file: 'C:\\Vijaik\\Freelancing\\test_service_getter\\service-job-mapping.json'
+            // def props = readJSON file: 'dir/input.json'
+            echo "confDataString: ${confDataString}"
         }
     }
 }
