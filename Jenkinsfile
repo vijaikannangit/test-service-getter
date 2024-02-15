@@ -63,20 +63,20 @@ node {
                 def serviceMap = slurper.parseText(scriptOutput)
                 echo "ServiceMap: ${serviceMap}"
 
-                // Read the content of the JSON file
-                def jsonFilePath = 'C:/Vijaik/Freelancing/test_service_getter/service-job-mapping.json'
-                echo "Test1"
-                def confDataString = readFile jsonFilePath
-                echo "Test2"
-                // Parse JSON content using JsonSlurper
-                def ConfserviceMap
-                script {
-                    ConfserviceMap = evaluate("new groovy.json.JsonSlurper().parseText('''${confDataString}''')")
-                    // ConfserviceMap = new JsonSlurperClassic().parseText(confDataString)
-                    // ConfserviceMap = evaluate("new groovy.json.JsonSlurper().parseText('''${confDataString}''')")
-                    }
-                }
-                echo "ConfserviceMap: ${ConfserviceMap}"
+                // // Read the content of the JSON file
+                // def jsonFilePath = 'C:/Vijaik/Freelancing/test_service_getter/service-job-mapping.json'
+                // echo "Test1"
+                // def confDataString = readFile jsonFilePath
+                // echo "Test2"
+                // // Parse JSON content using JsonSlurper
+                // def ConfserviceMap
+                // script {
+                //     ConfserviceMap = evaluate("new groovy.json.JsonSlurper().parseText('''${confDataString}''')")
+                //     // ConfserviceMap = new JsonSlurperClassic().parseText(confDataString)
+                //     // ConfserviceMap = evaluate("new groovy.json.JsonSlurper().parseText('''${confDataString}''')")
+                //     }
+                // }
+                // echo "ConfserviceMap: ${ConfserviceMap}"
             }
         }
     }
