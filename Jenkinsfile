@@ -69,12 +69,20 @@ node {
                 def confDataString = readFile jsonFilePath
                 echo "Test1"
                 // Parse JSON content using JsonSlurper
-                def ConfserviceMap = slurper.parseText(confDataString)
+                // def ConfserviceMap = slurper.parseText(confDataString)
+                def ConfserviceMap
+                script {
+                    ConfserviceMap = evaluate("new groovy.json.JsonSlurper().parseText('''${confDataString}''')")
+                }
                 echo "ConfserviceMap: ${ConfserviceMap}"
             }
         }
     }
 }
+
+            // Execute non-serializable logic inside evaluate
+
+
 
 // node () {
 //     stage('Deploy Services') {
