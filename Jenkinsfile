@@ -65,8 +65,9 @@ node {
 
                 // Read the content of the JSON file
                 def jsonFilePath = 'C:/Vijaik/Freelancing/test_service_getter/service-job-mapping.json'
+                echo "Test1"
                 def confDataString = readFile jsonFilePath
-
+                echo "Test1"
                 // Parse JSON content using JsonSlurper
                 def ConfserviceMap = slurper.parseText(confDataString)
                 echo "ConfserviceMap: ${ConfserviceMap}"
