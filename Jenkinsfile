@@ -68,7 +68,7 @@ node {
             def confDataString = readFile jsonFilePath
             // Parse JSON content using JsonSlurper
             // def slurper = new JsonSlurper()
-            def confDataString = readJSON file: 'C:\\Vijaik\\Freelancing\\test_service_getter\\service-job-mapping.json'
+            // def confDataString = readJSON file: 'C:\\Vijaik\\Freelancing\\test_service_getter\\service-job-mapping.json'
             // def props = readJSON file: 'dir/input.json'
             // echo "confDataString: ${confDataString}"
             def ConfserviceMap = slurper.parseText(confDataString)
