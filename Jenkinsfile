@@ -1,9 +1,5 @@
 import groovy.json.JsonSlurper
 
-// def jsonVariable = new groovy.json.JsonSlurper().parseText(jsonData)
-// println(jsonVariable)
-
-
 def confluenceBaseUrl = 'https://vijaik.atlassian.net/wiki'
 def confluencePageId = '2523141'
 def tableIndex = '16'
@@ -66,11 +62,8 @@ node {
             // Read the content of the JSON file
             def jsonFilePath = 'C:/Vijaik/Freelancing/test_service_getter/service-job-mapping.json'
             def confDataString = readFile jsonFilePath
+
             // Parse JSON content using JsonSlurper
-            // def slurper = new JsonSlurper()
-            // def confDataString = readJSON file: 'C:\\Vijaik\\Freelancing\\test_service_getter\\service-job-mapping.json'
-            // def props = readJSON file: 'dir/input.json'
-            // echo "confDataString: ${confDataString}"
             def ConfserviceMap = slurper.parseText(confDataString)
             echo "ConfserviceMap: ${ConfserviceMap}"
         }
