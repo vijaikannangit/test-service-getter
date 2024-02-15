@@ -69,7 +69,9 @@ node {
                 // def confDataString = readFile jsonFilePath
                 def confDataString = new File(jsonFilePath).text
                 echo "Test2"
-
+                def ConfserviceMap = new JsonSlurper().parse(confDataString)
+                echo "Test3"
+                echo "ConfserviceMap: ${ConfserviceMap}"
             }
         }
     }
