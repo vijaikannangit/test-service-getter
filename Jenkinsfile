@@ -74,7 +74,7 @@ node {
                     ConfserviceMap = evaluate("new groovy.json.JsonSlurper().parseText('''${confDataString}''')")
                     // ConfserviceMap = new JsonSlurperClassic().parseText(confDataString)
                     // ConfserviceMap = evaluate("new groovy.json.JsonSlurper().parseText('''${confDataString}''')")
-            }
+                    }
                 }
                 echo "ConfserviceMap: ${ConfserviceMap}"
             }
