@@ -56,7 +56,8 @@ node {
             // } else {
             //     error "Failed to get services list from Confluence page"
             // }
-            // Execute non-serializable logic inside a script block
+
+            // Execute PYTHON script output
             script {
                 // Parse scriptOutput using JsonSlurper
                 def slurper = new JsonSlurper()
@@ -69,6 +70,10 @@ node {
                 // Parse JSON content using JsonSlurper
                 def ConfserviceMap = new JsonSlurper().parseText(confDataString)
                 echo "ConfserviceMap: ${ConfserviceMap}"
+
+                // Ececute Service Names
+                def seviceNamesToExecute = serviceMap['RMI Platform']
+                echo "Here 1"
             }
         }
     }
