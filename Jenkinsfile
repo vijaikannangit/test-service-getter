@@ -63,7 +63,7 @@ node {
                 def serviceMap = slurper.parseText(scriptOutput)
                 echo "ServiceMap: ${serviceMap}"
 
-                Read the content of the JSON file
+                // Read the content of the JSON file
                 def jsonFilePath = 'C:/Vijaik/Freelancing/test_service_getter/service-job-mapping.json'
                 echo "Test1"
                 // def confDataString = readFile jsonFilePath
