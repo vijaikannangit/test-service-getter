@@ -71,9 +71,18 @@ node {
                 def ConfserviceMap = new JsonSlurper().parseText(confDataString)
                 echo "ConfserviceMap: ${ConfserviceMap}"
 
-                // Ececute Service Names
-                def seviceNamesToExecute = serviceMap['RMI Platform']
+                // Execute Service Names
+                def serviceNamesToExecute = serviceMap['RMI Platform'] 
                 echo "Here 1"
+                echo "serviceNamesToExecute: ${serviceNamesToExecute}"
+
+                // Map jobs = [:]
+                // for(serviceName in serviceNamesToExecute) {
+                //     def serviceConf = ConfserviceMap[serviceName]
+                //     echo "serviceConf: ${serviceConf}"
+                //     String jobName = serviceInfo.job
+                //     String version = seviceNamesToExecute['serviceName']                    
+                // }
             }
         }
     }
@@ -103,12 +112,6 @@ node {
 
                 // println(serviceMap)
                 // println "Appliction : ${serviceMap.RMI Platform}"
-                // println "Age: ${serviceMap.RMI Core API}"
-                // println "City: ${serviceMap.RMI Core UI}"
-                // println "City: ${serviceMap.RMI Workflow UI}"
-                // println "City: ${serviceMap.RMI Workflow API}"
-                // println "City: ${serviceMap.RMI Core API-LN}"
-                // println "City: ${serviceMap.RMI Core UI-LN}"
                 // def confDataString = readFile 'service-job-mapping.json'
                 // def serviceConfig = slurper.parseText(confDataString)
                 // def seviceNamesToExecute = serviceMap['RMI Platform']
