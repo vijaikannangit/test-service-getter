@@ -56,16 +56,21 @@ node {
             // } else {
             //     error "Failed to get services list from Confluence page"
             // }
-            def slurper = new JsonSlurper()
-            def serviceMap = slurper.parseText(scriptOutput)
-            echo "ServiceMap: ${serviceMap}"
-            // Read the content of the JSON file
-            def jsonFilePath = 'C:/Vijaik/Freelancing/test_service_getter/service-job-mapping.json'
-            def confDataString = readFile jsonFilePath
+            // Execute non-serializable logic inside a script block
+            script {
+                // Parse scriptOutput using JsonSlurper
+                def slurper = new JsonSlurper()
+                def serviceMap = slurper.parseText(scriptOutput)
+                echo "ServiceMap: ${serviceMap}"
 
-            // Parse JSON content using JsonSlurper
-            def ConfserviceMap = slurper.parseText(confDataString)
-            echo "ConfserviceMap: ${ConfserviceMap}"
+                // Read the content of the JSON file
+                def jsonFilePath = 'C:/Vijaik/Freelancing/test_service_getter/service-job-mapping.json'
+                def confDataString = readFile jsonFilePath
+
+                // Parse JSON content using JsonSlurper
+                def ConfserviceMap = slurper.parseText(confDataString)
+                echo "ConfserviceMap: ${ConfserviceMap}"
+            }
         }
     }
 }
