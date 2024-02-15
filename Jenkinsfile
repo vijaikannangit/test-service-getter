@@ -69,15 +69,7 @@ node {
                 // def confDataString = readFile jsonFilePath
                 def confDataString = new File(jsonFilePath).text
                 echo "Test2"
-                // Parse JSON content using JsonSlurper
-                def ConfserviceMap
-                script {
-                    ConfserviceMap = evaluate("new groovy.json.JsonSlurper().parseText('''${confDataString}''')")
-                //     // ConfserviceMap = new JsonSlurperClassic().parseText(confDataString)
-                //     // ConfserviceMap = evaluate("new groovy.json.JsonSlurper().parseText('''${confDataString}''')")
-                    }
-                // }
-                echo "ConfserviceMap: ${ConfserviceMap}"
+
             }
         }
     }
