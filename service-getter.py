@@ -1,4 +1,3 @@
-from html.parser import HTMLParser
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -10,15 +9,15 @@ argparser = argparse.ArgumentParser(prog='service-getter',
                                     description='To read table content from confluence page and providing output to jenkins pipeline')
 argparser.add_argument('-u', '--url', type=str, metavar='', required=True, help='url to access confluence page')
 argparser.add_argument('-t', '--table_index', type=str, metavar='', required=True, help='Table index to read from confluence page')
-argparser.add_argument('-p', '--table_app', type=str, metavar='', required=True, help='Table application header name to read from confluence page')
-argparser.add_argument('-s', '--table_servname', type=str, metavar='', required=True, help='Table service name header to read from confluence page')
+argparser.add_argument('-p', '--column_app', type=str, metavar='', required=True, help='Table application header name to read from confluence page')
+argparser.add_argument('-s', '--column_service', type=str, metavar='', required=True, help='Table service name header to read from confluence page')
 argparser.add_argument('-a', '--appname', type=str, metavar='', required=True, help='Application name')
 
 args = argparser.parse_args()
 confluence_rest_api = args.url
 table_index = args.table_index
-table_app = args.table_app
-table_servname = args.table_servname
+column_app = args.column_app
+column_service = args.column_service
 application_name = args.appname
 
 # Confluence Username and Apitoken
@@ -140,14 +139,51 @@ def find_service_name(table_data, target_application_name, applications_key, ser
 
 #  To get confluence page data
 html_content = get_confluence_page_html(username, confluence_apitoken)
+
+def write_service_output(service_names):
+    """
+    Write the service names to an output file in JSON format.
+
+    Args:
+        service_names (list): A list of service names.
+
+    Returns:
+        None
+    """
+    with open('output.json', 'w') as f:
+        json.dump(service_names, f)
+        # print(json.dumps(service_names, indent=2))
+
 if html_content:
     table_data = extract_table_data(html_content)
-    # print (f"table_data : {table_data}")
     if table_data:
-        service_names = find_service_name(table_data, application_name, table_app, table_servname) 
+        service_names = find_service_name(table_data, application_name, column_app, column_service) 
         if service_names:
-            with open('output.json', 'w') as f:
-                json.dump(service_names, f)
-            print(json.dumps(service_names, indent=2))
+            write_service_output(service_names)
+
+            # Read the content of the JSON file
+            json_file_path = 'service-job-mapping.json'
+            with open(json_file_path, 'r') as file:
+                service_mapping = json.load(file)
+
+            # Extract jobs from service_names
+            service_names_data = service_names[application_name]
+
+            # Update the 'version' field in the JSON with corresponding version from service_names_data
+            for service_name, version in service_names_data.items():
+                # Check if the service_name is present in service_mapping
+                if service_name in service_mapping:
+                    # Check if 'parameters' is present before updating 'version'
+                    if 'parameters' in service_mapping[service_name]:
+                        service_mapping[service_name]['parameters']['version'] = version
+
+            # Print the updated JSON content
+            updated_json_content = json.dumps(service_mapping, indent=2)
+            print(updated_json_content)
+
+            # version updated accordingly 
+            with open('updated-service-job-mapping.json', 'w') as updated_file:
+                updated_file.write(updated_json_content)
+
         else:
             print(f"Applications / Service names not found ")
