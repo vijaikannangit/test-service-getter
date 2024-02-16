@@ -27,9 +27,13 @@ node () {
         withCredentials([usernamePassword(credentialsId: 'CONFLUENCE', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
             // sh "python -m pip install -r requirements.txt --user"
             bat "python -m pip install -r requirements.txt --user"
+            echo "Vijai1"
             bat "python service-getter.py --url '$confluenceApiUrl' --table_index ${appTableIndex} --column_app '$columnApp' --column_service '$columnService' --appname '$appName'"
+            echo "Vijai2"
             def jobsInfo = readJSON file: "jobs.json"
+            echo "Vijai3"
             echo "Service getter output (Map): ${jobsInfo}"
+            echo "Vijai4"
                 // Map jobs = [:]
                 // for(jobInfo in jobsInfo) {
                 //     jobs.put(jobInfo.job, {
