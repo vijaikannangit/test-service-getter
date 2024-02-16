@@ -182,7 +182,7 @@ if html_content:
             print(updated_json_content)
 
             # version updated accordingly 
-            with open('updated-service-job-mapping.json', 'w') as updated_file:
+            with open('jobs.json', 'w') as updated_file:
                 updated_file.write(updated_json_content)
 
         else:

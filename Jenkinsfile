@@ -24,14 +24,12 @@ def scriptOutput = '''
 node () {
     stage('Deploy Services') {
         checkout scm
-        withCredentials([usernamePassword(credentialsId: 'CONFLUENCE', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
+        withCredentials([usernamePassword(credentialsId: 'CONFLUENCE_CRED', usernameVariable: 'CONFLUENCE_USERNAME', passwordVariable: 'CONFLUENCE_APITOKEN')]) {
             // sh "python -m pip install -r requirements.txt --user"
-            // def serviceGetterCmd = "python service-getter.py --url '$confluenceApiUrl' --table_index ${appTableIndex} --column_app '$columnApp' --column_service '$columnService' --appname '$appName'"
-            // def status = sh(script: serviceGetterCmd, returnStatus: true)
-            // if (status == 0) {
-                // def jobsInfo = readJSON file: "output.json"
-                def jobsInfo = readJSON file: "updated-service-job-mapping.json"
-                echo "Service getter output (Map): ${updated-service-job-mapping.json}"
+            bat "python -m pip install -r requirements.txt --user"
+            bat "python service-getter.py --url '$confluenceApiUrl' --table_index ${appTableIndex} --column_app '$columnApp' --column_service '$columnService' --appname '$appName'"
+            def jobsInfo = readJSON file: "jobs.json"
+            echo "Service getter output (Map): ${jobsInfo}"
                 // Map jobs = [:]
                 // for(jobInfo in jobsInfo) {
                 //     jobs.put(jobInfo.job, {
@@ -44,12 +42,19 @@ node () {
                 // }
                 // parallel(jobs)
 
-            // }else {
-            //     error "Failed to get services list from confluece page"
-            // }
+
         }
     }
 }
+
+// def getJobParamters(parameters) {
+//    def jobParameters = []
+//    for (entry in parameters) {
+//         jobParameters.add(new StringParameterValue(entry.key, entry.value))
+//    }
+//    return jobParameters
+// }
+
 
 // def getJobParamters(parameters) {
 //    def jobParameters = []
