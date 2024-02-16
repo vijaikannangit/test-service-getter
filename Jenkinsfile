@@ -21,14 +21,6 @@ def scriptOutput = '''
 }
 '''
 
-def confluenceBaseUrl = 'https://vijaik.atlassian.net/wiki'
-def confluencePageId = '2523141'  // '33141' for test
-def appTableIndex = 16
-def columnApp = 'Applications'
-def columnService = 'ServiceName'
-def appName = 'RMI Platform'
-def confluenceApiUrl = "${confluenceBaseUrl}/rest/api/content/${confluencePageId}?expand=body.storage"
-
 node () {
     stage('Deploy Services') {
         checkout scm
