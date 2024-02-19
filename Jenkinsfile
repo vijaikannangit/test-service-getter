@@ -34,19 +34,22 @@ node () {
             echo "Vijai3"
             echo "Service getter output (Map): ${jobsInfo}"
             echo "Vijai4"
-                // Map jobs = [:]
-                // for(jobInfo in jobsInfo) {
-                //     jobs.put(jobInfo.job, {
-                //         stage(jobInfo.job) {
-                //             node {
-                //                 build(job: jobName, parameters: getJobParamters(jobInfo.parameters), propagate: false)
-                //             }
-                //         }
-                //     })
-                // }
-                // parallel(jobs)
-
-
+                Map jobs = [:]
+                for(jobInfo in jobsInfo) {
+                    echo "Vijai5"
+                    jobs.put(jobInfo.job, {
+                        stage(jobInfo.job) {
+                            node {
+                                echo "Vijai6"
+                                build(job: jobName, parameters: getJobParamters(jobInfo.parameters), propagate: false)
+                                echo "Vijai7"
+                            }
+                        }
+                    })
+                }
+                echo "Vijai8"
+                parallel(jobs)
+                echo "Vijai8"
         }
     }
 }
