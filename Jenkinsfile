@@ -36,7 +36,7 @@ node () {
             echo "Vijai4"
                 Map jobs = [:]
                 for(jobInfo in jobsInfo) {
-                    echo "Vijai5"
+                    echo "Vijai5" :$jobInfo.job
                     jobs.put(jobInfo.job, {
                         stage(jobInfo.job) {
                             node {
