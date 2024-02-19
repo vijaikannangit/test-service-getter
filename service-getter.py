@@ -170,7 +170,7 @@ if html_content:
             service_names_data = service_names[application_name]
             # Create a list to store the updated service_mapping entries
 
-            updated_service_mapping = []
+            updated_service_mapping = {}
             # Update the 'version' field in the JSON with corresponding version from service_names_data
             for service_name, version in service_names_data.items():
                 # Check if the service_name is present in service_mapping
@@ -182,7 +182,7 @@ if html_content:
                     updated_service_mapping.append(service_mapping[service_name])
 
             # print(f"service_mapping  {service_mapping}")
-            # print(f"updated_service_mapping  {updated_service_mapping}")
+            print(f"updated_service_mapping  {updated_service_mapping}")
 
             # Print the updated JSON content
             # updated_json_content = json.dumps(updated_service_mapping, indent=2)
