@@ -36,7 +36,7 @@ node () {
                         stage(jobInfo.job) {
                             node {
                                 echo "Vijai6"
-                                build(job: jobName, parameters: getJobParamters(jobInfo.parameters), propagate: false)
+                                build(job: jobInfo.job, parameters: getJobParamters(jobInfo.parameters), propagate: false)
                                 echo "Vijai7"
                             }
                         }
