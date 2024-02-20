@@ -30,12 +30,9 @@ node () {
             // bat "python service-getter.py --url '$confluenceApiUrl' --table_index ${appTableIndex} --column_app '$columnApp' --column_service '$columnService' --appname '$appName'"
             def jobsInfo = readJSON file: "jobs.json"
             echo "Service getter output (Map): ${jobsInfo}"
-                echo "Vijai4"
                 Map jobs = [:]
                 for(jobInfo in jobsInfo) {
-                    echo "Vijai5"
                     jobs.put(jobInfo.job, {
-                        echo "Vijai5.1" ${jobInfo.job}
                         stage(jobInfo.job) {
                             node {
                                 echo "Vijai6"
