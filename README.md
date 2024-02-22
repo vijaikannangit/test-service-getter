@@ -52,5 +52,4 @@ It should print the services list as Json and Map. All the services are executed
 
 ![jenkins-job-listing-services](https://github.com/vijaikannangit/test-service-getter/blob/main/jenkins-job-listing-services1.png)
 ![jenkins-job-listing-services](https://github.com/vijaikannangit/test-service-getter/blob/main/jenkins-job-listing-services2.png)
-![jenkins-job-listing-services](https://github.com/vijaikannangit/test-service-getter/blob/main/jenkins-job-listing-services3.png)
-![jenkins-job-listing-services](https://github.com/vijaikannangit/test-service-getter/blob/main/jenkins-job-listing-services4.png)
+
