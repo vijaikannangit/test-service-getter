@@ -34,11 +34,12 @@ def appName = 'RMI Platform'
 - **appName**: Provide application name to look for in the table rows (Default - 'RMI Platform').
 
 ## Configuring Mapping Json 
-Create pipeline jobs using Mapping Json File
+Create pipeline jobs and parameters using Mapping Json File
 
-![jenkins-job-mapping-Json](https://github.com/kumvijaya/deploy-service-getter/blob/main/images/jenkins-job-listing-services.png)
 
-Execute the job It should print the services list as Json and Map
+![jenkins-job-mapping-Json](https://github.com/vijaikannangit/test-service-getter/blob/main/mapping_json.jpeg)
+
+
 
 ## Create Jenkins job and Test
 Create pipeline job using *Jenkinsfile* of this repo
