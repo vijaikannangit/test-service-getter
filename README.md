@@ -34,6 +34,11 @@ def appName = 'RMI Platform'
 - **appName**: Provide application name to look for in the table rows (Default - 'RMI Platform').
 
 ## Configuring Mapping Json 
+
+Mapping json file should be updated their job names and parameters key-vals for each service name.
+Also for the parameters that takes the version, need to put the place holder string "{{VERSION}}"
+![jenkins-job-mapping-Json](https://github.com/vijaikannangit/test-service-getter/blob/main/mapping_json_file.jpeg)
+
 ### Create pipeline jobs using Mapping Json File
 
 
