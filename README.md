@@ -34,13 +34,13 @@ def appName = 'RMI Platform'
 - **appName**: Provide application name to look for in the table rows (Default - 'RMI Platform').
 
 ## Configuring Mapping Json 
-Create pipeline jobs and parameters using Mapping Json File
+### Create pipeline jobs using Mapping Json File
 
 
 ![jenkins-job-mapping-Json](https://github.com/vijaikannangit/test-service-getter/blob/main/mapping_json.jpeg)
 
 
-### Job Configured with parameters
+### Jobs Created with parameters
 
 ![jenkins-job-mapping-Json-Parameters](https://github.com/vijaikannangit/test-service-getter/blob/main/mapping_json_parameters.jpeg)
 
@@ -48,6 +48,9 @@ Create pipeline jobs and parameters using Mapping Json File
 Create pipeline job using *Jenkinsfile* of this repo
 
 Execute the job
-It should print the services list as Json and Map
+It should print the services list as Json and Map. All the services are executed separately as per Mapping Json File.
 
-![jenkins-job-listing-services](https://github.com/kumvijaya/deploy-service-getter/blob/main/images/jenkins-job-listing-services.png)
+![jenkins-job-listing-services](https://github.com/vijaikannangit/test-service-getter/blob/main/jenkins-job-listing-services1.png)
+![jenkins-job-listing-services](https://github.com/vijaikannangit/test-service-getter/blob/main/jenkins-job-listing-services2.png)
+![jenkins-job-listing-services](https://github.com/vijaikannangit/test-service-getter/blob/main/jenkins-job-listing-services3.png)
+![jenkins-job-listing-services](https://github.com/vijaikannangit/test-service-getter/blob/main/jenkins-job-listing-services4.png)
