@@ -40,6 +40,9 @@ Create pipeline jobs and parameters using Mapping Json File
 ![jenkins-job-mapping-Json](https://github.com/vijaikannangit/test-service-getter/blob/main/mapping_json.jpeg)
 
 
+### Job Configured with parameters
+
+![jenkins-job-mapping-Json-Parameters](https://github.com/vijaikannangit/test-service-getter/blob/main/mapping_json_parameters.jpeg)
 
 ## Create Jenkins job and Test
 Create pipeline job using *Jenkinsfile* of this repo
