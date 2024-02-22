@@ -16,7 +16,7 @@ Mapping json file **service-job-mapping.json** should be updated the job names a
 Also for the parameters that takes the version, need to put the place holder string "{{VERSION}}".
 Replace job names and required parameters accordingly.
 
-![service-job-mapping.json](https://github.com/vijaikannangit/test-service-getter/blob/main/service-job-mapping.json)
+[service-job-mapping.json](https://github.com/vijaikannangit/test-service-getter/blob/main/service-job-mapping.json)
 
 
 ## Update Jenkinsfile with confluence url and page id.
