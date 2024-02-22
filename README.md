@@ -47,7 +47,8 @@ def appName = 'RMI Platform'
 ## Create Jenkins job and Test
 Create pipeline job using *Jenkinsfile* of this repo
 
-Execute the job
+Execute the job.
+
 It should print the services list as Json and Map. All the services are executed separately as per Mapping Json File.
 
 ![jenkins-job-listing-services](https://github.com/vijaikannangit/test-service-getter/blob/main/jenkins-job-listing-services1.png)
