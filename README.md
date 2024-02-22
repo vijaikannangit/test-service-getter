@@ -10,8 +10,15 @@ Note:
 - **Username**: Confluence user name
 - **Password**: Confluence personal access token. Refer creating [confluence personal access token](https://confluence.atlassian.com/enterprise/using-personal-access-tokens-1026032365.html)
 
+## Configure Service Jobs Mapping Json 
+
+Mapping json file **service-job-mapping.json** should be updated the job names and parameters key-vals for each service name.
+Also for the parameters that takes the version, need to put the place holder string "{{VERSION}}".
+Replace job names and required parameters accordingly.
+![jenkins-job-mapping-Json](https://github.com/vijaikannangit/test-service-getter/blob/main/mapping_json_file.png)
+
 ## Update Jenkinsfile with confluence url and page id.
-Update below variables in *Jenkinsfile* as per the confluence page where services list exists.
+Update below variables in **Jenkinsfile** as per the confluence page where services list exists.
 
 ```
 def confluenceBaseUrl = 'https://vijaik.atlassian.net/wiki'
@@ -32,13 +39,6 @@ def appName = 'RMI Platform'
 - **columnService**: Provide services column name in the table (Default - 'ServiceName').
 
 - **appName**: Provide application name to look for in the table rows (Default - 'RMI Platform').
-
-## Configuring Mapping Json 
-
-Mapping json file should be updated their job names and parameters key-vals for each service name.
-Also for the parameters that takes the version, need to put the place holder string "{{VERSION}}"
-![jenkins-job-mapping-Json](https://github.com/vijaikannangit/test-service-getter/blob/main/mapping_json_file.png)
-
 
 ## Create Jenkins job and Test
 Create pipeline job using *Jenkinsfile* of this repo
