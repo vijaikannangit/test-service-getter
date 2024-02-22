@@ -39,15 +39,6 @@ Mapping json file should be updated their job names and parameters key-vals for 
 Also for the parameters that takes the version, need to put the place holder string "{{VERSION}}"
 ![jenkins-job-mapping-Json](https://github.com/vijaikannangit/test-service-getter/blob/main/mapping_json_file.png)
 
-### Create pipeline jobs using Mapping Json File
-
-
-![jenkins-job-mapping-Json](https://github.com/vijaikannangit/test-service-getter/blob/main/mapping_json.jpeg)
-
-
-### Jobs Created with parameters
-
-![jenkins-job-mapping-Json-Parameters](https://github.com/vijaikannangit/test-service-getter/blob/main/mapping_json_parameters.jpeg)
 
 ## Create Jenkins job and Test
 Create pipeline job using *Jenkinsfile* of this repo
