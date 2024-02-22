@@ -37,7 +37,7 @@ def appName = 'RMI Platform'
 
 Mapping json file should be updated their job names and parameters key-vals for each service name.
 Also for the parameters that takes the version, need to put the place holder string "{{VERSION}}"
-![jenkins-job-mapping-Json](https://github.com/vijaikannangit/test-service-getter/blob/main/mapping_json_file.jpeg)
+![jenkins-job-mapping-Json](https://github.com/vijaikannangit/test-service-getter/blob/main/mapping_json_file.png)
 
 ### Create pipeline jobs using Mapping Json File
 
