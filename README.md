@@ -43,7 +43,7 @@ Also for the parameters that takes the version, need to put the place holder str
 ## Create Jenkins job and Test
 Create pipeline job using *Jenkinsfile* of this repo
 
-Execute the job.
+Execute the Master job.
 
 It should print the services list as Json and Map. All the services are executed separately as per Mapping Json File.
 Version in the Mapping file will be updated with the service version given in confluence page.
