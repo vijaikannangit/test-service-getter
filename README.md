@@ -55,6 +55,7 @@ Create pipeline job using *Jenkinsfile* of this repo
 Execute the job.
 
 It should print the services list as Json and Map. All the services are executed separately as per Mapping Json File.
+Version in the Mapping file will be updated with the service version given in confluence page.
 
 ![jenkins-job-listing-services](https://github.com/vijaikannangit/test-service-getter/blob/main/jenkins-job-listing-services1.png)
 ![jenkins-job-listing-services](https://github.com/vijaikannangit/test-service-getter/blob/main/jenkins-job-listing-services2.png)
